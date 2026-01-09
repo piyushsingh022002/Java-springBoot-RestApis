@@ -1,7 +1,7 @@
 ## Prompt
 
 ```
-Read the Readme.md file in this repository and create GitHub Issues for each task listed in the "Task Checklist" section.
+Read the README.md file in this repository and create GitHub Issues for each task listed in the "Task Checklist" section.
 
 For each task, create an issue with:
 
