@@ -4,7 +4,26 @@
 # This script uses GitHub CLI (gh) to create issues programmatically
 # Ensure you have gh installed and authenticated before running
 
-set -e
+# Check if gh is installed
+if ! command -v gh &> /dev/null; then
+    echo "Error: GitHub CLI (gh) is not installed."
+    echo "Please install it from: https://cli.github.com/"
+    exit 1
+fi
+
+# Check if we're in a git repository
+if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+    echo "Error: Not in a git repository."
+    echo "Please run this script from within your repository directory."
+    exit 1
+fi
+
+# Check if gh is authenticated
+if ! gh auth status &> /dev/null; then
+    echo "Error: GitHub CLI is not authenticated."
+    echo "Please run: gh auth login"
+    exit 1
+fi
 
 echo "Creating GitHub Issues for Java-springBoot-RestApis project..."
 echo "============================================================="
@@ -13,31 +32,31 @@ echo "============================================================="
 echo "Step 1: Creating labels..."
 
 # Phase-specific labels
-gh label create "setup" --color "0E8A16" --description "Project setup tasks" --force || true
-gh label create "database" --color "1D76DB" --description "Database related tasks" --force || true
-gh label create "repository" --color "5319E7" --description "Repository layer tasks" --force || true
-gh label create "dto-mapper" --color "D4C5F9" --description "DTO and Mapper tasks" --force || true
-gh label create "service" --color "0075CA" --description "Service layer tasks" --force || true
-gh label create "controller" --color "7057FF" --description "Controller layer tasks" --force || true
-gh label create "exception-handling" --color "D93F0B" --description "Exception handling tasks" --force || true
-gh label create "validation" --color "FBCA04" --description "Validation tasks" --force || true
-gh label create "security" --color "B60205" --description "Security related tasks" --force || true
-gh label create "logging" --color "BFD4F2" --description "Logging and monitoring tasks" --force || true
-gh label create "documentation" --color "0E8A16" --description "Documentation tasks" --force || true
-gh label create "testing" --color "FBCA04" --description "Testing related tasks" --force || true
-gh label create "performance" --color "FEF2C0" --description "Performance optimization tasks" --force || true
-gh label create "production" --color "C2E0C6" --description "Production readiness tasks" --force || true
-gh label create "finalization" --color "E99695" --description "Finalization tasks" --force || true
+gh label create "setup" --color "0E8A16" --description "Project setup tasks" --force 2>/dev/null || echo "  - Label 'setup' already exists or created"
+gh label create "database" --color "1D76DB" --description "Database related tasks" --force 2>/dev/null || echo "  - Label 'database' already exists or created"
+gh label create "repository" --color "5319E7" --description "Repository layer tasks" --force 2>/dev/null || echo "  - Label 'repository' already exists or created"
+gh label create "dto-mapper" --color "D4C5F9" --description "DTO and Mapper tasks" --force 2>/dev/null || echo "  - Label 'dto-mapper' already exists or created"
+gh label create "service" --color "0075CA" --description "Service layer tasks" --force 2>/dev/null || echo "  - Label 'service' already exists or created"
+gh label create "controller" --color "7057FF" --description "Controller layer tasks" --force 2>/dev/null || echo "  - Label 'controller' already exists or created"
+gh label create "exception-handling" --color "D93F0B" --description "Exception handling tasks" --force 2>/dev/null || echo "  - Label 'exception-handling' already exists or created"
+gh label create "validation" --color "FBCA04" --description "Validation tasks" --force 2>/dev/null || echo "  - Label 'validation' already exists or created"
+gh label create "security" --color "B60205" --description "Security related tasks" --force 2>/dev/null || echo "  - Label 'security' already exists or created"
+gh label create "logging" --color "BFD4F2" --description "Logging and monitoring tasks" --force 2>/dev/null || echo "  - Label 'logging' already exists or created"
+gh label create "documentation" --color "0E8A16" --description "Documentation tasks" --force 2>/dev/null || echo "  - Label 'documentation' already exists or created"
+gh label create "testing" --color "FBCA04" --description "Testing related tasks" --force 2>/dev/null || echo "  - Label 'testing' already exists or created"
+gh label create "performance" --color "FEF2C0" --description "Performance optimization tasks" --force 2>/dev/null || echo "  - Label 'performance' already exists or created"
+gh label create "production" --color "C2E0C6" --description "Production readiness tasks" --force 2>/dev/null || echo "  - Label 'production' already exists or created"
+gh label create "finalization" --color "E99695" --description "Finalization tasks" --force 2>/dev/null || echo "  - Label 'finalization' already exists or created"
 
 # Priority labels
-gh label create "priority: critical" --color "B60205" --description "Critical priority" --force || true
-gh label create "priority: high" --color "D93F0B" --description "High priority" --force || true
-gh label create "priority: medium" --color "FBCA04" --description "Medium priority" --force || true
-gh label create "priority: low" --color "0E8A16" --description "Low priority" --force || true
+gh label create "priority: critical" --color "B60205" --description "Critical priority" --force 2>/dev/null || echo "  - Label 'priority: critical' already exists or created"
+gh label create "priority: high" --color "D93F0B" --description "High priority" --force 2>/dev/null || echo "  - Label 'priority: high' already exists or created"
+gh label create "priority: medium" --color "FBCA04" --description "Medium priority" --force 2>/dev/null || echo "  - Label 'priority: medium' already exists or created"
+gh label create "priority: low" --color "0E8A16" --description "Low priority" --force 2>/dev/null || echo "  - Label 'priority: low' already exists or created"
 
 # Common labels
-gh label create "spring-boot" --color "6DB33F" --description "Spring Boot related" --force || true
-gh label create "poc" --color "C5DEF5" --description "Proof of Concept" --force || true
+gh label create "spring-boot" --color "6DB33F" --description "Spring Boot related" --force 2>/dev/null || echo "  - Label 'spring-boot' already exists or created"
+gh label create "poc" --color "C5DEF5" --description "Proof of Concept" --force 2>/dev/null || echo "  - Label 'poc' already exists or created"
 
 echo "Labels created successfully!"
 echo ""
@@ -45,21 +64,22 @@ echo ""
 # Create milestones
 echo "Step 2: Creating milestones..."
 
-gh api repos/:owner/:repo/milestones -f title="Phase 1: Project Setup & Foundation" -f description="Initialize project, setup structure, and configure application" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 2: Database & Entity Layer" -f description="Configure database and create domain entities" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 3: Repository Layer" -f description="Create repositories and data access layer" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 4: DTO & Mapper Layer" -f description="Create DTOs and mappers" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 5: Service Layer" -f description="Implement business logic" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 6: Controller Layer" -f description="Create REST controllers and API versioning" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 7: Exception Handling" -f description="Global exception handling and error responses" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 8: Validation" -f description="Bean validation and custom validators" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 9: Security" -f description="Authentication, JWT, and RBAC" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 10: Logging & Monitoring" -f description="Logging configuration and monitoring" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 11: API Documentation" -f description="OpenAPI/Swagger documentation" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 12: Testing" -f description="Unit, integration, and security tests" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 13: Performance & Optimization" -f description="Caching, optimization, and async processing" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 14: Production Readiness" -f description="Docker, configuration, and production features" || true
-gh api repos/:owner/:repo/milestones -f title="Phase 15: Documentation & Finalization" -f description="Final documentation and CI/CD" || true
+# Note: Milestones use GitHub API with :owner/:repo which gh CLI automatically resolves
+gh api repos/:owner/:repo/milestones -f title="Phase 1: Project Setup & Foundation" -f description="Initialize project, setup structure, and configure application" 2>/dev/null || echo "  - Milestone 'Phase 1' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 2: Database & Entity Layer" -f description="Configure database and create domain entities" 2>/dev/null || echo "  - Milestone 'Phase 2' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 3: Repository Layer" -f description="Create repositories and data access layer" 2>/dev/null || echo "  - Milestone 'Phase 3' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 4: DTO & Mapper Layer" -f description="Create DTOs and mappers" 2>/dev/null || echo "  - Milestone 'Phase 4' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 5: Service Layer" -f description="Implement business logic" 2>/dev/null || echo "  - Milestone 'Phase 5' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 6: Controller Layer" -f description="Create REST controllers and API versioning" 2>/dev/null || echo "  - Milestone 'Phase 6' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 7: Exception Handling" -f description="Global exception handling and error responses" 2>/dev/null || echo "  - Milestone 'Phase 7' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 8: Validation" -f description="Bean validation and custom validators" 2>/dev/null || echo "  - Milestone 'Phase 8' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 9: Security" -f description="Authentication, JWT, and RBAC" 2>/dev/null || echo "  - Milestone 'Phase 9' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 10: Logging & Monitoring" -f description="Logging configuration and monitoring" 2>/dev/null || echo "  - Milestone 'Phase 10' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 11: API Documentation" -f description="OpenAPI/Swagger documentation" 2>/dev/null || echo "  - Milestone 'Phase 11' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 12: Testing" -f description="Unit, integration, and security tests" 2>/dev/null || echo "  - Milestone 'Phase 12' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 13: Performance & Optimization" -f description="Caching, optimization, and async processing" 2>/dev/null || echo "  - Milestone 'Phase 13' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 14: Production Readiness" -f description="Docker, configuration, and production features" 2>/dev/null || echo "  - Milestone 'Phase 14' already exists or created"
+gh api repos/:owner/:repo/milestones -f title="Phase 15: Documentation & Finalization" -f description="Final documentation and CI/CD" 2>/dev/null || echo "  - Milestone 'Phase 15' already exists or created"
 
 echo "Milestones created successfully!"
 echo ""
@@ -116,6 +136,8 @@ src/main/java/com/example/app/
 ├── util/            # Utility classes
 └── validation/      # Custom validators
 \`\`\`
+
+**Note:** Replace \`com/example/app\` with your actual project package name.
 
 ### Desired Output
 Clean, organized package structure following Domain-Driven Design principles."

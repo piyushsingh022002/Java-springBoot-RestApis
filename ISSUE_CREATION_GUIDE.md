@@ -223,8 +223,9 @@ and follow the prompts.
 ### Error: "Repository not found"
 Ensure you're in the correct repository directory or specify the repository:
 ```bash
-gh issue create --repo piyushsingh022002/Java-springBoot-RestApis ...
+gh issue create --repo <owner>/<repository-name> ...
 ```
+Replace `<owner>/<repository-name>` with your actual GitHub repository (e.g., `username/Java-springBoot-RestApis`).
 
 ## Customization
 
