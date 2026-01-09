@@ -27,8 +27,8 @@
 ### Phase 1: Project Setup & Foundation
 
 #### Task 1.1: Initialize Spring Boot Project
-- [ ] Create project using Spring Initializr
-- [ ] **Dependencies to include:**
+- [ ✔ ] Create project using Spring Initializr
+- [ ✔ ] **Dependencies to include:**
   - Spring Web
   - Spring Data JPA
   - Spring Security
