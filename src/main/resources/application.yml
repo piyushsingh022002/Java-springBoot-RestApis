@@ -4,6 +4,10 @@ spring:
 
   application:
     name: springboot-poc
+  security:
+    user:
+      name: dev
+      password: dev
 
 ---
 spring:
@@ -12,10 +16,18 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/dev_db
-    username: dev_user
-    password: dev_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:devdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+
+    # hikari:
+    #   maximum-pool-size: 5
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 logging:
   level:
@@ -50,10 +62,16 @@ spring:
       on-profile: prod
 
   datasource:
-    url: jdbc:mysql://prod-db-server:3306/prod_db
-    username: prod_user
-    password: prod_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:sqlserver://localhost:1433;databaseName=springbootjava;multiActiveResultSets=false;encrypt=true;trustServerCertificate=true"
+    username: sa
+    password: admin@123456
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 10       # max connections in pool
+      minimum-idle: 2             # minimum idle connections
+      idle-timeout: 30000         # close idle connections after 30s
+      max-lifetime: 1800000       # recycle connection after 30 min
+      connection-timeout: 30000   # wait 30s for a connection
 
 logging:
   level:

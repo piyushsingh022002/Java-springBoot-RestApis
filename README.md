@@ -85,10 +85,10 @@ spring:
 ### Phase 2: Database & Entity Layer
 
 #### Task 2.1: Database Configuration
-- [ ] Configure H2 for development
-- [ ] Configure PostgreSQL for production
-- [ ] Set up Flyway/Liquibase for database migrations
-- [ ] Configure connection pooling (HikariCP)
+- [ ✔] Configure H2 for development
+- [ ✔] Configure SQL for production
+- [ ✔] Set up Flyway/Liquibase for database migrations : manages db schema changes safely, track with          migrations, have run and apply new changes automatically.
+- [ ✔] Configure connection pooling (HikariCP)
 
 **Desired Output:** Database connectivity with automatic schema management and connection pooling.
 
