@@ -95,14 +95,14 @@ spring:
 ---
 
 #### Task 2.2: Create Base Entity
-- [ ] Create `BaseEntity` with common audit fields:
+- [ ✔ ] Create `BaseEntity` with common audit fields:
   - `id` (UUID)
   - `createdAt`
   - `updatedAt`
   - `createdBy`
   - `updatedBy`
   - `version` (for optimistic locking)
-- [ ] Implement JPA Auditing
+- [ ✔ ] Implement JPA Auditing
 
 **Desired Output:**
 ```java
