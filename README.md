@@ -44,7 +44,7 @@
 ---
 
 #### Task 1.2: Project Structure Setup
-- [ ] Create proper package structure:
+- [ ✔ ] Create proper package structure:
 ```
 src/main/java/com/example/app/
 ├── config/          # Configuration classes
@@ -65,10 +65,10 @@ src/main/java/com/example/app/
 ---
 
 #### Task 1.3: Application Properties Configuration
-- [ ] Create `application.yml` with profiles (dev, prod, test)
-- [ ] Configure database connections
-- [ ] Set up logging levels
-- [ ] Configure server settings
+- [ ✔] Create `application.yml` with profiles (dev, prod, test)
+- [ ✔] Configure database connections
+- [ ✔] Set up logging levels
+- [ ✔] Configure server settings
 
 **Desired Output:**
 ```yaml

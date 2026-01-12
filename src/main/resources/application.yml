@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: springboot-poc
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/dev_db
+    username: dev_user
+    password: dev_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: DEBUG
+
+server:
+  port: 8080
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_db
+    username: test_user
+    password: test_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: 8081
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:mysql://prod-db-server:3306/prod_db
+    username: prod_user
+    password: prod_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: WARN
+
+server:
+  port: 8082
