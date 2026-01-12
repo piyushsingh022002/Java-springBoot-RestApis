@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.Set;
 
+@Entity
+@Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Role extends BaseEntity {
     @NotBlank
     @Column(unique = true, nullable = false)
