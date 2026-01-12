@@ -127,10 +127,10 @@ public abstract class BaseEntity {
 ---
 
 #### Task 2.3: Create Domain Entities
-- [ ] Create `User` entity with proper validations
-- [ ] Create `Role` entity for RBAC
-- [ ] Create sample domain entity (e.g., `Product`, `Order`)
-- [ ] Define entity relationships (OneToMany, ManyToMany)
+- [ ✔ ] Create `User` entity with proper validations
+- [ ✔ ] Create `Role` entity for RBAC
+- [ ✔ ] Create sample domain entity (e.g., `Product`, `Order`)
+- [ ✔ ] Define entity relationships (OneToMany, ManyToMany)
 
 **Desired Output:** Fully mapped JPA entities with proper relationships and constraints.
 
