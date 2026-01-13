@@ -139,10 +139,10 @@ public abstract class BaseEntity {
 ### Phase 3: Repository Layer
 
 #### Task 3.1: Create Repositories
-- [ ] Create `UserRepository` extending `JpaRepository`
-- [ ] Create custom query methods using `@Query`
-- [ ] Implement pagination and sorting
-- [ ] Create specifications for dynamic queries
+- [ ✔ ] Create `UserRepository` extending `JpaRepository`
+- [ ✔ ] Create custom query methods using `@Query`
+- [ ✔ ] Implement pagination and sorting
+- [ ✔ ] Create specifications for dynamic queries
 
 **Desired Output:**
 ```java
