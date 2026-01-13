@@ -12,17 +12,22 @@ import org.springframework.data.repository.query.Param;
 
 import com.RESTapis.javaBackend.entity.User;
 
+import ch.qos.logback.core.status.Status;
+
 public interface UserRepository extends
         JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
     Optional<User> findByEmail(String email);
 
-    @Query("""
-            SELECT u
-            FROM User u
-            WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :username, '%'))
-            """)
-    Page<User> searchByUsername(
-            @Param("username") String username,
-            Pageable pageable);
+    // @Query("""
+    // SELECT u
+    // FROM User u
+    // WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :username, '%'))
+    // """)
+    // Page<User> searchByUsername(
+    // @Param("username") String username,
+    // Pageable pageable);
+
+    @Query("SELECT u FROM User u WHERE u.status = :status")
+    Page<User> findByStatus(@Param("status") Status status, Pageable pageable);
 
 }
