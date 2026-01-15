@@ -16,7 +16,12 @@ import ch.qos.logback.core.status.Status;
 
 public interface UserRepository extends
         JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
+
+    // find user by email
     Optional<User> findByEmail(String email);
+
+    // find user by username
+    Optional<User> findByUsername(String username);
 
     // @Query("""
     // SELECT u
