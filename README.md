@@ -159,9 +159,9 @@ public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificat
 ### Phase 4: DTO & Mapper Layer
 
 #### Task 4.1: Create DTOs
-- [ ] Create Request DTOs with validation annotations
-- [ ] Create Response DTOs
-- [ ] Create PageResponse wrapper for pagination
+- [ ✔ ] Create Request DTOs with validation annotations
+- [ ✔ ] Create Response DTOs
+- [ ✔ ] Create PageResponse wrapper for pagination
 
 **Desired Output:**
 ```java
@@ -182,9 +182,9 @@ public record UserCreateRequest(
 ---
 
 #### Task 4.2: Create Mappers
-- [ ] Set up MapStruct configuration
-- [ ] Create entity-to-DTO mappers
-- [ ] Handle nested object mapping
+- [ ✔ ] Set up MapStruct configuration
+- [ ✔ ] Create entity-to-DTO mappers
+- [ ✔ ] Handle nested object mapping
 
 **Desired Output:**
 ```java
